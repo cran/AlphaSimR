@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="date" content="2018-10-01" />
+
+<title>Introduction to AlphaSimR</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceLine, a.sourceLine { display: inline-block; min-height: 1.25em; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; }
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+div.sourceLine, a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource div.sourceLine, .numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource div.sourceLine::before, .numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; color: #aaaaaa;  padding-left: 4px; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; color: initial; }
+}
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.bn { color: #40a070; } /* BaseN */
+code span.fl { color: #40a070; } /* Float */
+code span.ch { color: #4070a0; } /* Char */
+code span.st { color: #4070a0; } /* String */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.ot { color: #007020; } /* Other */
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.fu { color: #06287e; } /* Function */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code span.cn { color: #880000; } /* Constant */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.im { } /* Import */
+code span.va { color: #19177c; } /* Variable */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.op { color: #666666; } /* Operator */
+code span.bu { } /* BuiltIn */
+code span.ex { } /* Extension */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.at { color: #7d9029; } /* Attribute */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to AlphaSimR</h1>
+<h4 class="date"><em>2018-10-01</em></h4>
+
+
+
+<p>AlphaSimR is a package for performing stochastic simulations of plant and animal breeding programs. It is the successor to the AlphaSim software for breeding program simulation <span class="citation">(Faux et al. 2016)</span>. AlphaSimR combines the features of its predecessor with the R software environment to create a flexible and easy-to-use software environment capable of simulating very complex plant and animal breeding programs.</p>
+<p>There is no single way to construct a simulation in AlphaSimR. This is an intentional design aspect of AlphaSimR, because it frees users from the constraints of predefined simulation structures. However, most simulations follow a general structure consisting of four steps:</p>
+<ol style="list-style-type: decimal">
+<li>Creating Founder Haplotypes</li>
+<li>Setting Simulation Parameters</li>
+<li>Modeling the Breeding Program</li>
+<li>Examining the Results</li>
+</ol>
+<p>The easiest way to learn how to use AlphaSimR is to learn about these steps. The easiest way to learn about these steps is to look at an example, so this vignette will introduce AlphaSimR by working through a small example simulation. The example will begin with a description of the breeding program being simulated. This will be followed by sections for each of the above steps and conclude with the full code for the example simulation.</p>
+<div id="example-breeding-program" class="section level2">
+<h2>Example Breeding Program</h2>
+<p>A breeding program based on the “historical breeding” portion of the Jenko et al. simulation will be used as an example <span class="citation">(2015)</span>. This example simulation models 20 discrete generations of selection in a simplified animal breeding program. The discrete generations consist of 1000 animals, of which 500 are male and 500 are female. In each generation, the best 25 males are selected on the basis of their genetic value for a single polygenic trait and mated to the females to produce 1000 replacement animals. The quantitative trait is modeled as being controlled by 10,000 QTL. These QTL are equally split across 10 chromosome groups so that there are 1,000 QTL per chromosome. The mean genetic value of all individuals in a generation is recorded to construct a plot for the genetic gain per generation.</p>
+</div>
+<div id="creating-founder-haplotypes" class="section level2">
+<h2>Creating Founder Haplotypes</h2>
+<p>The first step in the simulation is creating a set of founder haplotypes. The founder haplotypes are used to form the genome and genotypes of animals in the first generation. The genotypes of their descendants are then derived from these haplotypes using simulated mating and genetic recombination. For this simulation, only a single line of code is needed to create the haplotypes, and it is given below.</p>
+<pre class="sourceCode r" id="cb1"><code class="sourceCode r"><div class="sourceLine" id="cb1-1" data-line-number="1">founderPop =<span class="st"> </span><span class="kw">runMacs</span>(<span class="dt">nInd=</span><span class="dv">1000</span>, <span class="dt">nChr=</span><span class="dv">10</span>, <span class="dt">segSites=</span><span class="dv">1000</span>)</div></code></pre>
+<p>The code above uses the <code>runMacs</code> function. The <code>runMacs</code> function is a wrapper for the MaCS software, a coalescent simulation program included within the distribution of AlphaSimR <span class="citation">(Chen, Marjoram, and Wall 2009)</span>. The MaCS software is used by AlphaSimR to simulate bi-allelic genome sequences according to a population demographic history. In the above code no population demographic history is explicitly declared, so <code>runMacs</code> uses the default “GENERIC” history. The “GENERIC” history is the same history used by Jenko et al. to model cattle <span class="citation">(2015)</span>. The <code>runMacs</code> function allows the user to specify one of several other predefined histories or supply their own history. The available histories are listed in the <code>runMacs</code> help document.</p>
+<p>The <code>runMacs</code> function is not the only way to create founder haplotypes in AlphaSimR. There are actually a few functions, but the most likely second choice is <code>newMapPop</code>. This function imports user supplied haplotypes; allowing the user to use their own means for generating haplotypes or import real marker data.</p>
+</div>
+<div id="setting-simulation-parameters" class="section level2">
+<h2>Setting Simulation Parameters</h2>
+<p>The second step is setting global parameters for the simulation. This can be done with three lines of code. The first line initializes an object containing the simulation parameters. The object must be initialized with the founder haplotypes created in the previous step and the code for doing so is given below.</p>
+<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><div class="sourceLine" id="cb2-1" data-line-number="1">SP =<span class="st"> </span>SimParam<span class="op">$</span><span class="kw">new</span>(founderPop)</div></code></pre>
+<p>The output from this function is an object of class <code>SimParam</code> and it is saved with the name <code>SP</code>. The name <code>SP</code> should almost always be used, because many AlphaSimR functions use an argument called “simParam” with a default value of <code>NULL</code>. If you leave this value as <code>NULL</code>, those functions will search your global environment for an object called <code>SP</code> and use it as the function’s argument. This means that if you use <code>SP</code>, you won’t need to specify a value for the “simParam” argument.</p>
+<p>The next line of code defines the quantitative trait used for selection. As mentioned in the previous section, this trait is controlled by 1000 QTL per chromosome. The rest of the function arguments are left as their defaults, which include a trait mean of zero and a variance of one unit.</p>
+<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><div class="sourceLine" id="cb3-1" data-line-number="1">SP<span class="op">$</span><span class="kw">addTraitA</span>(<span class="dt">nQtlPerChr=</span><span class="dv">1000</span>)</div></code></pre>
+<p>The final line of code defines how gender is determined in the simulation. Gender will be systematically assigned (i.e. male, female, male, …). Systematic assignment is used to ensure that there is always equal numbers of males and females.</p>
+<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><div class="sourceLine" id="cb4-1" data-line-number="1">SP<span class="op">$</span><span class="kw">setGender</span>(<span class="st">&quot;yes_sys&quot;</span>)</div></code></pre>
+</div>
+<div id="modeling-the-breeding-program" class="section level2">
+<h2>Modeling the Breeding Program</h2>
+<p>We are now ready to start modeling the breeding program. To begin, we need to generate the initial population of animals. This step will take the haplotypes in <code>founderPop</code> and the information in <code>SP</code> to create an object of <code>Pop-class</code>.</p>
+<pre class="sourceCode r" id="cb5"><code class="sourceCode r"><div class="sourceLine" id="cb5-1" data-line-number="1">pop =<span class="st"> </span><span class="kw">newPop</span>(founderPop)</div></code></pre>
+<p>A <code>Pop-class</code> object represents a population of individuals. A population is the most important units in AlphaSimR, because most AlphaSimR functions use one or more populations as an argument. In this regard, AlphSimR can be thought of as modeling discrete populations as its basic unit. This contrasts with its predecessor, which used discrete generations.</p>
+<p>Populations are not a fixed unit in AlphaSimR. Many functions in AlphaSimR take a population as an argument, modify the population, and then return the modified population. Populations can also be used “directly”. For example, you can pull individuals out to form new (sub-)populations using <code>[]</code> and you can merge populations together using <code>c()</code>. This functionality is particularly useful for performing tasks in AlphaSimR that lacks a built-in function. However, the example breeding program presented here is easily modeled using built-in functions.</p>
+<p>Before continuing to model the breeding program, you should first think about the data you’ll need for examining the results in the next stage. This is because you must expressly request that the relevant data is saved. AlphaSimR is designed this way for increased speed and reduced memory usage.</p>
+<p>In this example a plot of the generation mean over time is desired. All that is needed to construct this plot is a vector containing the mean in each generation. To start this vector, the mean in the current generation is saved as “genMean”. In each subsequent generation, the mean of that generation will be added to “genMean”. Measuring the mean in the current generation is accomplished with the code below.</p>
+<pre class="sourceCode r" id="cb6"><code class="sourceCode r"><div class="sourceLine" id="cb6-1" data-line-number="1">genMean =<span class="st"> </span><span class="kw">meanG</span>(pop)</div></code></pre>
+<p>The final lines of code are for modeling 20 generations of selection and mating. AlphaSimR has a host of functions for modeling both selection and mating. In this example the <code>selectCross</code> function is used, because it efficiently combines both selection and mating in a single function call. To model multiple generation of selection, the function call is placed in a loop with a line of code for tracking the population mean. Using a loop makes code easier to read and decreases avoids needless duplication of code. In this loop “pop” is overwritten in each generation. This is done because it is more efficient from a memory usage perspective and there is no need to retain older populations in this simulation. The code for the loop is given below.</p>
+<pre class="sourceCode r" id="cb7"><code class="sourceCode r"><div class="sourceLine" id="cb7-1" data-line-number="1"><span class="cf">for</span>(generation <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>){</div>
+<div class="sourceLine" id="cb7-2" data-line-number="2">  pop =<span class="st"> </span><span class="kw">selectCross</span>(<span class="dt">pop=</span>pop, <span class="dt">nFemale=</span><span class="dv">500</span>, <span class="dt">nMale=</span><span class="dv">25</span>, <span class="dt">use=</span><span class="st">&quot;gv&quot;</span>, <span class="dt">nCrosses=</span><span class="dv">1000</span>)</div>
+<div class="sourceLine" id="cb7-3" data-line-number="3">  genMean =<span class="st"> </span><span class="kw">c</span>(genMean, <span class="kw">meanG</span>(pop))</div>
+<div class="sourceLine" id="cb7-4" data-line-number="4">}</div></code></pre>
+</div>
+<div id="examining-the-results" class="section level2">
+<h2>Examining the Results</h2>
+<p>The last step to a simulation is examining the results. In this example there is only one result: a vector of population means for each generation. To examine this result, the code below will produce a basic line plot.</p>
+<pre class="sourceCode r" id="cb8"><code class="sourceCode r"><div class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">plot</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">20</span>, genMean, <span class="dt">xlab=</span><span class="st">&quot;Generation&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Mean Genetic Value&quot;</span>)</div></code></pre>
+</div>
+<div id="full-code" class="section level2">
+<h2>Full Code</h2>
+<pre class="sourceCode r" id="cb9"><code class="sourceCode r"><div class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">library</span>(AlphaSimR)</div></code></pre>
+<pre><code>## Loading required package: R6</code></pre>
+<pre class="sourceCode r" id="cb11"><code class="sourceCode r"><div class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># Creating Founder Haplotypes</span></div>
+<div class="sourceLine" id="cb11-2" data-line-number="2">founderPop =<span class="st"> </span><span class="kw">runMacs</span>(<span class="dt">nInd=</span><span class="dv">1000</span>, <span class="dt">nChr=</span><span class="dv">10</span>, <span class="dt">segSites=</span><span class="dv">1000</span>)</div>
+<div class="sourceLine" id="cb11-3" data-line-number="3"></div>
+<div class="sourceLine" id="cb11-4" data-line-number="4"><span class="co"># Setting Simulation Parameters</span></div>
+<div class="sourceLine" id="cb11-5" data-line-number="5">SP =<span class="st"> </span>SimParam<span class="op">$</span><span class="kw">new</span>(founderPop)</div>
+<div class="sourceLine" id="cb11-6" data-line-number="6">SP<span class="op">$</span><span class="kw">addTraitA</span>(<span class="dt">nQtlPerChr=</span><span class="dv">1000</span>)</div>
+<div class="sourceLine" id="cb11-7" data-line-number="7">SP<span class="op">$</span><span class="kw">setGender</span>(<span class="st">&quot;yes_sys&quot;</span>)</div>
+<div class="sourceLine" id="cb11-8" data-line-number="8"></div>
+<div class="sourceLine" id="cb11-9" data-line-number="9"><span class="co"># Modeling the Breeding Program</span></div>
+<div class="sourceLine" id="cb11-10" data-line-number="10">pop =<span class="st"> </span><span class="kw">newPop</span>(founderPop)</div>
+<div class="sourceLine" id="cb11-11" data-line-number="11">genMean =<span class="st"> </span><span class="kw">meanG</span>(pop)</div>
+<div class="sourceLine" id="cb11-12" data-line-number="12"><span class="cf">for</span>(generation <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>){</div>
+<div class="sourceLine" id="cb11-13" data-line-number="13">  pop =<span class="st"> </span><span class="kw">selectCross</span>(<span class="dt">pop=</span>pop, <span class="dt">nFemale=</span><span class="dv">500</span>, <span class="dt">nMale=</span><span class="dv">25</span>, <span class="dt">use=</span><span class="st">&quot;gv&quot;</span>, <span class="dt">nCrosses=</span><span class="dv">1000</span>)</div>
+<div class="sourceLine" id="cb11-14" data-line-number="14">  genMean =<span class="st"> </span><span class="kw">c</span>(genMean, <span class="kw">meanG</span>(pop))</div>
+<div class="sourceLine" id="cb11-15" data-line-number="15">}</div>
+<div class="sourceLine" id="cb11-16" data-line-number="16"></div>
+<div class="sourceLine" id="cb11-17" data-line-number="17"><span class="co"># Examining the Results</span></div>
+<div class="sourceLine" id="cb11-18" data-line-number="18"><span class="kw">plot</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">20</span>, genMean, <span class="dt">xlab=</span><span class="st">&quot;Generation&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Mean Genetic Value&quot;</span>)</div></code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAYAAAAUg66AAAAEDWlDQ1BJQ0MgUHJvZmlsZQAAOI2NVV1oHFUUPrtzZyMkzlNsNIV0qD8NJQ2TVjShtLp/3d02bpZJNtoi6GT27s6Yyc44M7v9oU9FUHwx6psUxL+3gCAo9Q/bPrQvlQol2tQgKD60+INQ6Ium65k7M5lpurHeZe58853vnnvuuWfvBei5qliWkRQBFpquLRcy4nOHj4g9K5CEh6AXBqFXUR0rXalMAjZPC3e1W99Dwntf2dXd/p+tt0YdFSBxH2Kz5qgLiI8B8KdVy3YBevqRHz/qWh72Yui3MUDEL3q44WPXw3M+fo1pZuQs4tOIBVVTaoiXEI/MxfhGDPsxsNZfoE1q66ro5aJim3XdoLFw72H+n23BaIXzbcOnz5mfPoTvYVz7KzUl5+FRxEuqkp9G/Ajia219thzg25abkRE/BpDc3pqvphHvRFys2weqvp+krbWKIX7nhDbzLOItiM8358pTwdirqpPFnMF2xLc1WvLyOwTAibpbmvHHcvttU57y5+XqNZrLe3lE/Pq8eUj2fXKfOe3pfOjzhJYtB/yll5SDFcSDiH+hRkH25+L+sdxKEAMZahrlSX8ukqMOWy/jXW2m6M9LDBc31B9LFuv6gVKg/0Szi3KAr1kGq1GMjU/aLbnq6/lRxc4XfJ98hTargX++DbMJBSiYMIe9Ck1YAxFkKEAG3xbYaKmDDgYyFK0UGYpfoWYXG+fAPPI6tJnNwb7ClP7IyF+D+bjOtCpkhz6CFrIa/I6sFtNl8auFXGMTP34sNwI/JhkgEtmDz14ySfaRcTIBInmKPE32kxyyE2Tv+thKbEVePDfW/byMM1Kmm0XdObS7oGD/MypMXFPXrCwOtoYjyyn7BV29/MZfsVzpLDdRtuIZnbpXzvlf+ev8MvYr/Gqk4H/kV/G3csdazLuyTMPsbFhzd1UabQbjFvDRmcWJxR3zcfHkVw9GfpbJmeev9F08WW8uDkaslwX6avlWGU6NRKz0g/SHtCy9J30o/ca9zX3Kfc19zn3BXQKRO8ud477hLnAfc1/G9mrzGlrfexZ5GLdn6ZZrrEohI2wVHhZywjbhUWEy8icMCGNCUdiBlq3r+xafL549HQ5jH+an+1y+LlYBifuxAvRN/lVVVOlwlCkdVm9NOL5BE4wkQ2SMlDZU97hX86EilU/lUmkQUztTE6mx1EEPh7OmdqBtAvv8HdWpbrJS6tJj3n0CWdM6busNzRV3S9KTYhqvNiqWmuroiKgYhshMjmhTh9ptWhsF7970j/SbMrsPE1suR5z7DMC+P/Hs+y7ijrQAlhyAgccjbhjPygfeBTjzhNqy28EdkUh8C+DU9+z2v/oyeH791OncxHOs5y2AtTc7nb/f73TWPkD/qwBnjX8BoJ98VVBg/m8AADYqSURBVHgB7Z0HmBRV1oavAQOIWVcX/pU14ComRMEEIooCBlARDICoYGJVRFTMATHngIIBMWECFRHFAIqgKKyYUFQUw4qrrgpmTPXf9+xWb01PzVTP0N3VM/2d55npqlu36976qvrUuScuFXhyIiEgBIRACggsncKYGlIICAEhYAiIAelBEAJCIDUExIBSg14DCwEhIAakZ0AICIHUEBADSg16DSwEhIAYkJ4BISAEUkNADCg16DWwEBACYkB6BoSAEEgNATGg1KDXwEJACIgB6RkQAkIgNQTEgFKDXgMLASEgBqRnQAgIgdQQEANKDXoNLASEgBiQngEhIARSQ0AMKDXoNbAQEAJiQHoGhIAQSA0BMaDUoNfAQkAIiAHpGRACQiA1BMSAUoNeAwsBISAGpGdACAiB1BAQA0oNeg0sBISAGJCeASEgBFJDQAwoNeg1sBAQAmJAegaEgBBIDQExoNSg18BCQAiIAekZEAJCIDUExIBSg14DCwEhIAakZ0AICIHUEBADSg16DSwEhIAYkJ4BISAEUkNADCg16DWwEBACYkB6BoSAEEgNATGg1KDXwEJACIgB6RkQAkIgNQTEgFKDXgMLASEgBqRnQAgIgdQQEANKDXoNLASEgBiQngEhIARSQ0AMKDXoNbAQEAJiQHoGhIAQSA0BMaDUoNfAQkAIiAHpGRACQiA1BMSAUoNeAwsBISAGpGdACAiB1BAQA0oNeg0sBISAGJCeASEgBFJDQAwoNeg1sBAQAmJAegaEgBBIDQExoNSg18BCQAiIAekZEAJCIDUExIBSg14DCwEhIAakZ0AICIHUEBADSg16DSwEhIAYkJ4BISAEUkNADCg16DWwEBACYkB6BoSAEEgNATGg1KDXwEJACIgB6RkQAkIgNQTEgFKDXgMLASEgBqRnQAgIgdQQEANKDXoNLASEQI0Y0A8//OBef/119/3337vFixcLPSEgBITAEiGQEwP65z//6bp37+5WWmklt+WWW7q33nrLnXrqqW7w4MHuxx9/XKIJ6MtCQAiULwKJDOiXX35x++yzj3v33XfdVVdd5Ro2bGhotW3b1t1yyy1u4MCB5YuerlwICIElQmDZpG8//fTT7tNPPzUGtMoqq7hzzjnHvrL//vu7lVde2R166KEuCAK31FJLJZ1Kx4WAEBACFRBIlIDee+8916JFCwfzyaZtt93WffbZZ+7DDz/MPqR9ISAEhEAiAokM6K9//aubPn26+/LLLyud7N5773XLLrusa9KkSaVjahACQkAIJCGQuATr0KGDa9q0qevSpYsbNGiQ++OPPxxS0aOPPupuuukmd/DBB7vlllsuaRwdFwJCQAhUQmApr78JKrVmNWB679u3r5s9e3aFI926dXOjRo1yq666aoV27QgBISAEckEgJwbEiZB8/vGPf5j0g8SDXmiTTTbJZQz1EQJCQAjEIpAzA4r9thqFgBAQAkuAQKIOaMaMGW7IkCHVDvHss89We1wHhYAQEAJxCCQyoOWXX96tu+66Fb777bffurlz5zo8pOWIWAEa7QgBIVADBGq9BEN3fdxxx7mvvvrKjRkzpgZDqqsQEAJC4D8I1JoB8XUcEDfccEO3cOFCixMTqEJACAiBmiCQ6IhY3ck+//xz9/vvv7tFixZV103HhIAQEAKxCCRKQEg548ePr/BlmM7XX3/tbr75Zrfaaqu5t99+u8Jx7QgBISAEckEgUQlN6o2TTz650rkaNWrkttpqK3fNNddUOlYODddee6278cYbY2PkyuH6dY3pI4AeFv88Ppdeemn7i85qhRVWsIiFxo0bR5tLajtRAiqp2ZbQZAjEveCCC8SASuielNNUUHuQj+vf//63xWK+8sor9kl85jLLLGNQ7LLLLg43GnJ4lSolSkClOvG050UQLulItttuu7SnovHLDAGSALIC6d27t7vjjjvs6lGL4DJz2mmnucmTJ1uQePPmzUsemVgGRMzX888/n/Pkjz/++Jz7FqojNwVdFExh/fXXz7wFCjWezisE0kJg+PDhrnXr1hnmwzyQen777Te3ww47uCeeeMLttddeaU2vRuPGMiA8m5O8n6OjFJMBXXHFFWb2Hzp0aGYKF110kTvvvPMyeao32GADx03afffdM320IQTqCwIv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ZE6nrYoBgZm37tgP278tzTHRh2bkdM58daqKAXkpKPAKfcORufklYeA9kvM1bOx5YCyMVdXfLbfckvleqT6DmQnGbCglq7+z+SKPr6OUUdOmTRMT+edrzFzPgwWJ2m7MjRirUicUu15ic3/5y19KbqooyXEyJeav1KrElPIzGHcjxYDiUFGbEBACRUFASuiiwKxBhIAQiENADCgOFbUJASFQFATEgIoCswYRAkIgDgExoDhU1CYEhEBREBADKgrMGkQICIE4BMSA4lBRmxAQAkVBQAyoKDBrECEgBOIQEAOKQ0VtQkAIFAUBMaCiwKxBhIAQiENADCgOFbUJASFQFATEgIoCswYRAkIgDgExoDhU1CYEhEBREBADKgrMGkQICIE4BMSA4lBRmxAQAkVBQAyoKDBrECEgBOIQEAOKQ0VtQkAIFAUBMaCiwKxBhIAQiENADCgOFbUJASFQFATEgIoCswYRAkIgDgExoDhU1CYEhEBREBADKgrMGkQICIE4BMSA4lBRmxAQAkVBQAyoKDBrECEgBOIQEAOKQ0VtQkAIFAUBMaCiwFzag1Dl86uvvirtSWp29RIBMaB6eVuTL+qtt95yffv2dc2bN3drrbWW83Xt3brrrutOPvlkRxnnukYvvfSSmzZtWmbaRx55pGvVqlVmXxuliYAYUGnel4LOihrxHTt2dLNmzXJnnXWWe/XVV92MGTPccccd566//nq32267FXT8fJ/8t99+c9tvv72bN29e5tTs77XXXpl9bZQmAsuW5rQ0q0Ih8N1337ndd9/drb/++u6pp55yK6ywQmaoNm3auC222MLtvffe7umnn64zjCgIAsdflA477LDorrZLFAFJQCV6Ywo1LZYp7733nrv88ssrMJ9wPKSGc845x5ZkYRuft956q2vZsqVr3Lixa926tRs/fnzm8IsvvmhtnHePPfZwq666qttyyy3duHHjMn3Y+P77792xxx7rmjVrZufv1q2b++ijjzJ9mNsOO+zgnnzySde0aVO38847u6+//totXrzYnXbaacYcGzVqZMvGE044wf3444/2t91229k5zj33XNenTx/bHjZsmOvVq1fm3J9//rktOZs0aWJLzq5du7r3338/czzXa8h8QRv5QcC/OURlhID/kQbLLbdc4PU8OV/1pZdeGiy77LLBwQcfHDz88MPBiSeeGCy11FLBgw8+aOd44oknbN9LVYHXKwW33XZb4JmCtfkfufX5448/As+4grXXXjs4++yzA8+cgnbt2gVe/xR4Bbj1mTBhQrDMMssE6623XnDQQQcFnkFZe48ePawf8xg7dmzQv39/xB07z6+//hqMGjXK9ml/7LHH7Dtsb7311rbNtbZo0SLwjC+4/fbbg/vvvz/Ydtttg1VWWSX49NNPrU8u12Ad9S+vCCC6isoIgS5dugR+mVXhir0OJXj99dft77XXXgv489KM9fnmm2+ClVdeOfBLmgrf6dmzZ7DhhhtaGz9eGAIMIqRPPvnE2kaMGGFNY8aMsf2JEyeGXQIvwQReogm8dGNtMCDO46WXTJ8ffvgh8JJXcNNNN2Xa2KDN66qsDQbD92BEIUUZ0LXXXmuM7d133w0PG9OD2XlltbXlcg2ZL2sjbwhIB+Sf3HIiL7nYUih6zYsWLbLlTbSNZQ3LEhTU3377rS2pXnjhhUyXjTbayN13333uyy+/zLS1b98+s80SCv0S34Wef/555yUOW8JFz8NSLbpPX5ZeITVs2NC98sortouyGUUzc8JSxxIsF5o5c6bzEo9jziGtvvrqtmzMHru6awi/q8/8ISAGlD8s68SZUDR7KcTBdGAIkJdw3OTJkzPzP/300zPboY5m4MCBmbboBha1kDDlR8kv9ZxfelkT/Rizbdu20S62jU4oSjCvKE2fPt0xJyx1fsllzBJ9EvPOhebPn+/Q/WQTjM5LaBWaq7uGCh21kxcEpITOC4x15yQwIC8/u6lTp2Ym7fU7bpdddsn8rbHGGpljSAoQP36YSfYfkkVISFdVEef0uh33+++/VzrHBx98UOFrfmmU2fc6Gte5c2e39NJLuwceeMAcJpGANt9880yfpA38nFBmZxMWQb+MrNBc3TVU6KidvCAgBpQXGOvOSXbaaSdbTmGmnjNnTqWJ80P1+ptMu1feOn6ULLf4DP+8TsYdcMAB7ueff870rW6D8yBN4TAYngNG6BXbZpGr6rss3WAUw4cPd/vss49bbbXVHEuxN954w5gZ34M5QTC3OGJsfJ68PitzGEb6zDPPVFp6ZjpooygIiAEVBebSGQSdyqRJkxySTYcOHRzm7IceeshM5kOGDHEbb7yxmzt3ruvevbtNGn8hr3B23rJljAJztreEucGDB7tNN9001pQfd7VHHXWUQwoaMGCAmfAXLFjgGA+ppjrHxx133NEhEY0ePdp5hbRjKXfooYcaM2Mf4jj6Jsz3MLhswsES6t27t30PvdXxxx/vPv74Y9evX7/s7tovJgJ5U2frRHUKAS+NBJ4pBJ6JmLncP3OBZxDBvvvuG7zzzjsVrsXrbsy8jimefj5kw0zhWLGg0ILkdS22H/7DenbJJZeEu8Hs2bPNesU5vBRkZvKodSu0gmFBi9LQoUMDr8MxVwBcCDxDCa6++mpzJ/ASm3XFNYD5YdaHolYw9r1C3a41HBuzPPMOKddrCPvrMz8ILMVp/E0RlTECLLuwKGUrf7MhwfKETqaZVxqzjKotLVy40JZu66yzTs6n4DFF+mGODRo0iP3eTz/9ZPolnBWrIgJvORd6IVH6CIgBpX8PNAMhULYISAdUtrdeFy4E0kdADCj9e6AZCIGyRUAMqGxvvS5cCKSPgBhQ+vdAMxACZYuAGFDZ3npduBBIHwExoPTvgWYgBMoWATGgsr31unAhkD4CYkDp3wPNQAiULQJiQGV763XhQiB9BMSA0r8HmoEQKFsExIDK9tbrwoVA+giIAaV/DzQDIVC2CIgBle2t14ULgfQREANK/x5oBkKgbBEQAyrbW68LFwLpIyAGlP490AyEQNkiIAZUtrdeFy4E0kdADCj9e6AZCIGyRUAMqGxvvS5cCKSPgBhQ+vdAMxACZYuAGFDZ3npduBBIHwExoPTvgWYgBMoWgf8HTwcFZVpJ51YAAAAASUVORK5CYII=" /><!-- --></p>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references">
+<div id="ref-MaCS">
+<p>Chen, Gary K., Paul Marjoram, and Jeffery D. Wall. 2009. “Fast and Flexible Simulation of Dna Sequence Data.” <em>Genome Research</em> 19:136–42. <a href="http://genome.cshlp.org/content/19/1/136" class="uri">http://genome.cshlp.org/content/19/1/136</a>.</p>
+</div>
+<div id="ref-AlphaSim">
+<p>Faux, Anne-Michelle, Gregor Gorjanc, R. Chris Gaynor, Mara Battagin, Stefan M. Edwards, David L. Wilson, Sarah J. Hearne, Serap Gonen, and John M. Hickey. 2016. “AlphaSim: Software for Breeding Program Simulation.” <em>The Plant Genome</em> 9 (3). <a href="https://doi.org/10.3835/plantgenome2016.02.0013" class="uri">https://doi.org/10.3835/plantgenome2016.02.0013</a>.</p>
+</div>
+<div id="ref-Jenko15">
+<p>Jenko, Janez, Gregor Gorjanc, Matthew A. Cleveland, Rajeev K. Varshney, C. Bruce A. Whitelaw, John A. Woolliams, and John M. Hickey. 2015. “Potential of Promotion of Alleles by Genome Editing to Improve Quantitative Traits in Livestock Breeding Programs.” <em>Genetics Selection Evolution</em> 47 (55). <a href="https://doi.org/10.1186/s12711-015-0135-3" class="uri">https://doi.org/10.1186/s12711-015-0135-3</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
