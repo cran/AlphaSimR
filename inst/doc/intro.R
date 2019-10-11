@@ -1,5 +1,5 @@
 ## ----eval=FALSE----------------------------------------------------------
-#  founderPop = runMacs(nInd=1000, nChr=10, segSites=1000)
+#  founderPop = quickHaplo(nInd=1000, nChr=10, segSites=1000)
 
 ## ----eval=FALSE----------------------------------------------------------
 #  SP = SimParam$new(founderPop)
@@ -25,11 +25,12 @@
 ## ----eval=FALSE----------------------------------------------------------
 #  plot(0:20, genMean, xlab="Generation", ylab="Mean Genetic Value", type="l")
 
-## ------------------------------------------------------------------------
+## ----message=FALSE, warning=FALSE----------------------------------------
 library(AlphaSimR)
 
+## ------------------------------------------------------------------------
 # Creating Founder Haplotypes
-founderPop = runMacs(nInd=1000, nChr=10, segSites=1000)
+founderPop = quickHaplo(nInd=1000, nChr=10, segSites=1000)
 
 # Setting Simulation Parameters
 SP = SimParam$new(founderPop)
