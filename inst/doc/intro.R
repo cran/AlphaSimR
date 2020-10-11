@@ -8,7 +8,7 @@
 #  SP$addTraitA(nQtlPerChr=1000)
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  SP$setGender("yes_sys")
+#  SP$setSexes("yes_sys")
 
 ## ----eval=FALSE---------------------------------------------------------------
 #  pop = newPop(founderPop)
@@ -35,7 +35,7 @@ founderPop = quickHaplo(nInd=1000, nChr=10, segSites=1000)
 # Setting Simulation Parameters
 SP = SimParam$new(founderPop)
 SP$addTraitA(nQtlPerChr=1000)
-SP$setGender("yes_sys")
+SP$setSexes("yes_sys")
 
 # Modeling the Breeding Program
 pop = newPop(founderPop)
