@@ -1,8 +1,8 @@
 Package: AlphaSimR
 Type: Package
 Title: Breeding Program Simulations
-Version: 1.0.2
-Date: 2021-07-28
+Version: 1.0.3
+Date: 2021-07-29
 Authors@R: c(person("Chris", "Gaynor", email = "gaynor.robert@hotmail.com",
   role = c("aut", "cre"), comment = c(ORCID = "0000-0003-0558-6656")),
   person("Gregor", "Gorjanc", role = "ctb", 
@@ -34,7 +34,7 @@ RoxygenNote: 7.1.1
 Suggests: knitr, rmarkdown, testthat
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2021-07-28 14:44:20 UTC; gayno
+Packaged: 2021-07-29 13:00:57 UTC; gayno
 Author: Chris Gaynor [aut, cre] (<https://orcid.org/0000-0003-0558-6656>),
   Gregor Gorjanc [ctb] (<https://orcid.org/0000-0001-8008-2787>),
   John Hickey [ctb] (<https://orcid.org/0000-0001-5675-3974>),
@@ -42,4 +42,4 @@ Author: Chris Gaynor [aut, cre] (<https://orcid.org/0000-0003-0558-6656>),
   David Wilson [ctb]
 Maintainer: Chris Gaynor <gaynor.robert@hotmail.com>
 Repository: CRAN
-Date/Publication: 2021-07-28 15:20:02 UTC
+Date/Publication: 2021-07-29 13:30:02 UTC

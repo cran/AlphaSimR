@@ -1,7 +1,7 @@
-2f96df82c40636190202f4a40bfa83bb *DESCRIPTION
+b3e293126107e7b943e2f35d1728f36b *DESCRIPTION
 60da859463482a7ed89f264766728188 *LICENSE
 e81de523b6e653f4fe39c826a62ebc65 *NAMESPACE
-17e53f2296faa768ead7fbbd12d8fd20 *NEWS
+2596452ed272932c4908e0596490e004 *NEWS
 0f038bb75b805b6d2309896d9c739eeb *R/AlphaSimR.R
 71e21ce1cb6e9bdd7eb29b5296679dea *R/Class-HybridPop.R
 76096e71c51cdb114af5a94d4e4adfdc *R/Class-LociMap.R
@@ -11,7 +11,7 @@ abc2f615f93c847ebc144ba6e1d48054 *R/Class-SimParam.R
 3219f9bd674d42a42d16d39399664982 *R/GS.R
 220de58dcc23bda3c882c4eb09b6795d *R/RcppExports.R
 98cfb624c8e682baf5a61653657e4703 *R/crossing.R
-63b06aa6342ba5a25a4dc4773dd9c2db *R/founderPop.R
+e303bac788925c3c591221c4f3adea7f *R/founderPop.R
 7a698c9c674c3cd99df2db7e99de9196 *R/hybrids.R
 20d9395796490e0b231aaed120e34b30 *R/mergePops.R
 95eda88b7320b45ae2247dd3cd1fe5ea *R/misc.R
@@ -29,9 +29,9 @@ cbc30c3bdb80a0ba152033e4d689da20 *configure.ac
 9be964c4daef73aa035a6aecc42a12b9 *inst/CITATION
 a9eff901e41bcc9721efdd0b085ba0dd *inst/doc/intro.R
 8890eebb84665107d7e684461741ec9a *inst/doc/intro.Rmd
-4ccdd17f7c0a22792f35fbcd9ac7d9b4 *inst/doc/intro.html
+7ccfa5d74cf0c3a4952083b74d5ed2da *inst/doc/intro.html
 41d9bac5bd56c1722ba82f7848b0d0d3 *inst/doc/traits.Rmd
-cde469288751adfc154fc09ed5b103a2 *inst/doc/traits.pdf
+0cb478339ad5c741563d9a55c9dda0d4 *inst/doc/traits.pdf
 e8acc6187281a6c0b11377c16a60c8ff *man/AlphaSimR-package.Rd
 d8b97c4d5a683e658669ad8ac7a3b4f6 *man/HybridPop-class.Rd
 480331dda42000ba418bd6bc8cfe1388 *man/LociMap-class.Rd
