@@ -1,7 +1,7 @@
-b3e293126107e7b943e2f35d1728f36b *DESCRIPTION
+36f621db8872cdbb99e34d938354806d *DESCRIPTION
 60da859463482a7ed89f264766728188 *LICENSE
 e81de523b6e653f4fe39c826a62ebc65 *NAMESPACE
-2596452ed272932c4908e0596490e004 *NEWS
+ab731f904c5d124cc066c046206c6d24 *NEWS
 0f038bb75b805b6d2309896d9c739eeb *R/AlphaSimR.R
 71e21ce1cb6e9bdd7eb29b5296679dea *R/Class-HybridPop.R
 76096e71c51cdb114af5a94d4e4adfdc *R/Class-LociMap.R
@@ -29,9 +29,9 @@ cbc30c3bdb80a0ba152033e4d689da20 *configure.ac
 9be964c4daef73aa035a6aecc42a12b9 *inst/CITATION
 a9eff901e41bcc9721efdd0b085ba0dd *inst/doc/intro.R
 8890eebb84665107d7e684461741ec9a *inst/doc/intro.Rmd
-7ccfa5d74cf0c3a4952083b74d5ed2da *inst/doc/intro.html
+650320b5355220c49e6a64674be2bdd0 *inst/doc/intro.html
 41d9bac5bd56c1722ba82f7848b0d0d3 *inst/doc/traits.Rmd
-0cb478339ad5c741563d9a55c9dda0d4 *inst/doc/traits.pdf
+8f66fc001041eff12e96e7646bf1a580 *inst/doc/traits.pdf
 e8acc6187281a6c0b11377c16a60c8ff *man/AlphaSimR-package.Rd
 d8b97c4d5a683e658669ad8ac7a3b4f6 *man/HybridPop-class.Rd
 480331dda42000ba418bd6bc8cfe1388 *man/LociMap-class.Rd
@@ -136,7 +136,7 @@ c219ffdc3c777f7c6c5b9b58481bbefb *man/varP.Rd
 8538ea3f1a25c4ea2751911e6b2f15ac *src/Makevars.in
 bee230df6ebea3196c0fe754585c486a *src/Makevars.win
 0fbd87b2129f90076ac9cbe3c0d29b3b *src/OCS.cpp
-f009530e418520dfdd70c8729a627f3a *src/RcppExports.cpp
+da387f9c857bf37e905669e65c0d2d1c *src/RcppExports.cpp
 0df51bf31db1d146db87c2918b195cb6 *src/algorithm.cpp
 7605ca8c267200bd65a36fd07f21c720 *src/alphaSuite.cpp
 3ea5fa5fe51978446b386a3e43ad0dc4 *src/alphasimr.h
@@ -148,7 +148,7 @@ f009530e418520dfdd70c8729a627f3a *src/RcppExports.cpp
 004ad186eb2b3e64807c952361c6579f *src/getGv.cpp
 3bc1990c304c6ba088debe85f870d174 *src/getHybridGv.cpp
 baf58b581e523d1a2c10357c6a56eac5 *src/ibd.cpp
-a669afe350f9e4af16ab1ce46380b935 *src/meiosis.cpp
+01bc55b26cebde0586191c3758e05e9a *src/meiosis.cpp
 d12ccf5b055966ba0df02635e1344468 *src/misc.cpp
 bc0c25734b5a070b832badb4367459c2 *src/misc.h
 e4a088c01ee18fdb6f60d0b5f3fcf624 *src/optimize.cpp
