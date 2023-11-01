@@ -12,7 +12,7 @@
 
 <meta name="author" content="Chris Gaynor" />
 
-<meta name="date" content="2023-03-27" />
+<meta name="date" content="2023-10-31" />
 
 <title>Introduction to AlphaSimR</title>
 
@@ -362,7 +362,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Introduction to AlphaSimR</h1>
 <h4 class="author">Chris Gaynor</h4>
-<h4 class="date">2023-03-27</h4>
+<h4 class="date">2023-10-31</h4>
 
 
 
@@ -412,7 +412,7 @@ descendants are then derived from these haplotypes using simulated
 mating and genetic recombination. For this simulation, only a single
 line of code is needed to create the haplotypes, and it is given
 below.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>founderPop <span class="ot">=</span> <span class="fu">quickHaplo</span>(<span class="at">nInd=</span><span class="dv">1000</span>, <span class="at">nChr=</span><span class="dv">10</span>, <span class="at">segSites=</span><span class="dv">1000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>founderPop <span class="ot">=</span> <span class="fu">quickHaplo</span>(<span class="at">nInd=</span><span class="dv">1000</span>, <span class="at">nChr=</span><span class="dv">10</span>, <span class="at">segSites=</span><span class="dv">1000</span>)</span></code></pre></div>
 <p>The code above uses the <code>quickHaplo</code> function to generate
 the initial haplotypes. The <code>quickHaplo</code> function generates
 haplotypes by randomly sampling 1s and 0s. This approach is equivalent
@@ -442,7 +442,7 @@ can be done with three lines of code. The first line initializes an
 object containing the simulation parameters. The object must be
 initialized with the founder haplotypes created in the previous step and
 the code for doing so is given below.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>SP <span class="ot">=</span> SimParam<span class="sc">$</span><span class="fu">new</span>(founderPop)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>SP <span class="ot">=</span> SimParam<span class="sc">$</span><span class="fu">new</span>(founderPop)</span></code></pre></div>
 <p>The output from this function is an object of class
 <code>SimParam</code> and it is saved with the name <code>SP</code>. The
 name <code>SP</code> should almost always be used, because many
@@ -457,7 +457,7 @@ selection. As mentioned in the previous section, this trait is
 controlled by 1000 QTL per chromosome. The rest of the function
 arguments are left as their defaults, which include a trait mean of zero
 and a variance of one unit.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>SP<span class="sc">$</span><span class="fu">addTraitA</span>(<span class="at">nQtlPerChr=</span><span class="dv">1000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>SP<span class="sc">$</span><span class="fu">addTraitA</span>(<span class="at">nQtlPerChr=</span><span class="dv">1000</span>)</span></code></pre></div>
 <p>The ‘A’ at the end of <code>SP$addTraitA</code> indicates that the
 trait’s QTL only have additive effects. All traits in AlphaSimR will
 include additive effects. Traits may also include any combination of
@@ -472,7 +472,7 @@ currently offered: “A”, “AD”, “AE”, “AG”, “ADE”, “ADG”, 
 simulation. Sex will be systematically assigned (i.e. male, female,
 male, …). Systematic assignment is used to ensure that there is always
 equal numbers of males and females.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>SP<span class="sc">$</span><span class="fu">setSexes</span>(<span class="st">&quot;yes_sys&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>SP<span class="sc">$</span><span class="fu">setSexes</span>(<span class="st">&quot;yes_sys&quot;</span>)</span></code></pre></div>
 </div>
 <div id="modeling-the-breeding-program" class="section level2">
 <h2>Modeling the Breeding Program</h2>
@@ -480,7 +480,7 @@ equal numbers of males and females.</p>
 need to generate the initial population of animals. This step will take
 the haplotypes in <code>founderPop</code> and the information in
 <code>SP</code> to create an object of <code>Pop-class</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">=</span> <span class="fu">newPop</span>(founderPop)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>pop <span class="ot">=</span> <span class="fu">newPop</span>(founderPop)</span></code></pre></div>
 <p>A <code>Pop-class</code> object represents a population of
 individuals. A population is the most important units in AlphaSimR,
 because most AlphaSimR functions use one or more populations as an
@@ -507,7 +507,7 @@ mean in each generation. To start this vector, the mean in the current
 generation is saved as “genMean”. In each subsequent generation, the
 mean of that generation will be added to “genMean”. Measuring the mean
 in the current generation is accomplished with the code below.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>genMean <span class="ot">=</span> <span class="fu">meanG</span>(pop)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>genMean <span class="ot">=</span> <span class="fu">meanG</span>(pop)</span></code></pre></div>
 <p>The final lines of code are for modeling 20 generations of selection
 and mating. AlphaSimR has a host of functions for modeling both
 selection and mating. In this example the <code>selectCross</code>
@@ -525,10 +525,10 @@ approaches that could be adopted. These approaches include giving each
 population a unique name, storing populations as elements in a list, or
 dynamically growing populations with <code>c()</code>. The code for the
 loop is given below.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(generation <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>){</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  pop <span class="ot">=</span> <span class="fu">selectCross</span>(<span class="at">pop=</span>pop, <span class="at">nFemale=</span><span class="dv">500</span>, <span class="at">nMale=</span><span class="dv">25</span>, <span class="at">use=</span><span class="st">&quot;gv&quot;</span>, <span class="at">nCrosses=</span><span class="dv">1000</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  genMean <span class="ot">=</span> <span class="fu">c</span>(genMean, <span class="fu">meanG</span>(pop))</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="cf">for</span>(generation <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>){</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  pop <span class="ot">=</span> <span class="fu">selectCross</span>(<span class="at">pop=</span>pop, <span class="at">nFemale=</span><span class="dv">500</span>, <span class="at">nMale=</span><span class="dv">25</span>, <span class="at">use=</span><span class="st">&quot;gv&quot;</span>, <span class="at">nCrosses=</span><span class="dv">1000</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  genMean <span class="ot">=</span> <span class="fu">c</span>(genMean, <span class="fu">meanG</span>(pop))</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="examining-the-results" class="section level2">
 <h2>Examining the Results</h2>
@@ -536,30 +536,30 @@ loop is given below.</p>
 example there is only one result: a vector of population means for each
 generation. To examine this result, the code below will produce a basic
 line plot.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>, genMean, <span class="at">xlab=</span><span class="st">&quot;Generation&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Mean Genetic Value&quot;</span>, <span class="at">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>, genMean, <span class="at">xlab=</span><span class="st">&quot;Generation&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Mean Genetic Value&quot;</span>, <span class="at">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
 </div>
 <div id="full-code" class="section level2">
 <h2>Full Code</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AlphaSimR)</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating Founder Haplotypes</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>founderPop <span class="ot">=</span> <span class="fu">quickHaplo</span>(<span class="at">nInd=</span><span class="dv">1000</span>, <span class="at">nChr=</span><span class="dv">10</span>, <span class="at">segSites=</span><span class="dv">1000</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting Simulation Parameters</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>SP <span class="ot">=</span> SimParam<span class="sc">$</span><span class="fu">new</span>(founderPop)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>SP<span class="sc">$</span><span class="fu">addTraitA</span>(<span class="at">nQtlPerChr=</span><span class="dv">1000</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>SP<span class="sc">$</span><span class="fu">setSexes</span>(<span class="st">&quot;yes_sys&quot;</span>)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Modeling the Breeding Program</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">=</span> <span class="fu">newPop</span>(founderPop)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>genMean <span class="ot">=</span> <span class="fu">meanG</span>(pop)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(generation <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>){</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  pop <span class="ot">=</span> <span class="fu">selectCross</span>(<span class="at">pop=</span>pop, <span class="at">nFemale=</span><span class="dv">500</span>, <span class="at">nMale=</span><span class="dv">25</span>, <span class="at">use=</span><span class="st">&quot;gv&quot;</span>, <span class="at">nCrosses=</span><span class="dv">1000</span>)</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  genMean <span class="ot">=</span> <span class="fu">c</span>(genMean, <span class="fu">meanG</span>(pop))</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Examining the Results</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>, genMean, <span class="at">xlab=</span><span class="st">&quot;Generation&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Mean Genetic Value&quot;</span>, <span class="at">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">library</span>(AlphaSimR)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Creating Founder Haplotypes</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>founderPop <span class="ot">=</span> <span class="fu">quickHaplo</span>(<span class="at">nInd=</span><span class="dv">1000</span>, <span class="at">nChr=</span><span class="dv">10</span>, <span class="at">segSites=</span><span class="dv">1000</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># Setting Simulation Parameters</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>SP <span class="ot">=</span> SimParam<span class="sc">$</span><span class="fu">new</span>(founderPop)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>SP<span class="sc">$</span><span class="fu">addTraitA</span>(<span class="at">nQtlPerChr=</span><span class="dv">1000</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>SP<span class="sc">$</span><span class="fu">setSexes</span>(<span class="st">&quot;yes_sys&quot;</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># Modeling the Breeding Program</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>pop <span class="ot">=</span> <span class="fu">newPop</span>(founderPop)</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>genMean <span class="ot">=</span> <span class="fu">meanG</span>(pop)</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="cf">for</span>(generation <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>){</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>  pop <span class="ot">=</span> <span class="fu">selectCross</span>(<span class="at">pop=</span>pop, <span class="at">nFemale=</span><span class="dv">500</span>, <span class="at">nMale=</span><span class="dv">25</span>, <span class="at">use=</span><span class="st">&quot;gv&quot;</span>, <span class="at">nCrosses=</span><span class="dv">1000</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>  genMean <span class="ot">=</span> <span class="fu">c</span>(genMean, <span class="fu">meanG</span>(pop))</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>}</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co"># Examining the Results</span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>, genMean, <span class="at">xlab=</span><span class="st">&quot;Generation&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Mean Genetic Value&quot;</span>, <span class="at">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="unnumbered">References</h1>
