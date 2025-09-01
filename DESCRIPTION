@@ -1,8 +1,8 @@
 Package: AlphaSimR
 Type: Package
 Title: Breeding Program Simulations
-Version: 1.6.1
-Date: 2024-11-01
+Version: 2.0.0
+Date: 2025-09-01
 Authors@R: c(person("Chris", "Gaynor", email = "gaynor.robert@hotmail.com",
   role = c("aut", "cre"), comment = c(ORCID = "0000-0003-0558-6656")),
   person("Gregor", "Gorjanc", role = "ctb", 
@@ -17,7 +17,9 @@ Authors@R: c(person("Chris", "Gaynor", email = "gaynor.robert@hotmail.com",
   person("Audrey", "Martin", role = "ctb",
   comment = c(ORCID = "0000-0003-2235-0098")),
   person("Philip", "Greenspoon", role = "ctb",
-  comment = c(ORCID = "0000-0001-6284-7248")))
+  comment = c(ORCID = "0000-0001-6284-7248")),
+  person("Ros", "Craddock", role = "ctb",
+  comment = c(ORCID = "0009-0004-1578-1580")))
 Description: The successor to the 'AlphaSim' software for breeding program 
   simulation [Faux et al. (2016) <doi:10.3835/plantgenome2016.02.0013>]. 
   Used for stochastic simulations of breeding programs to the level of DNA 
@@ -43,15 +45,18 @@ RoxygenNote: 7.3.2
 Suggests: knitr, rmarkdown, testthat
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2024-11-01 14:23:49 UTC; gmjwm
-Author: Chris Gaynor [aut, cre] (<https://orcid.org/0000-0003-0558-6656>),
-  Gregor Gorjanc [ctb] (<https://orcid.org/0000-0001-8008-2787>),
-  John Hickey [ctb] (<https://orcid.org/0000-0001-5675-3974>),
-  Daniel Money [ctb] (<https://orcid.org/0000-0001-5151-3648>),
+Packaged: 2025-09-01 21:18:47 UTC; gayno
+Author: Chris Gaynor [aut, cre] (ORCID:
+    <https://orcid.org/0000-0003-0558-6656>),
+  Gregor Gorjanc [ctb] (ORCID: <https://orcid.org/0000-0001-8008-2787>),
+  John Hickey [ctb] (ORCID: <https://orcid.org/0000-0001-5675-3974>),
+  Daniel Money [ctb] (ORCID: <https://orcid.org/0000-0001-5151-3648>),
   David Wilson [ctb],
-  Thiago Oliveira [ctb] (<https://orcid.org/0000-0002-4555-2584>),
-  Audrey Martin [ctb] (<https://orcid.org/0000-0003-2235-0098>),
-  Philip Greenspoon [ctb] (<https://orcid.org/0000-0001-6284-7248>)
+  Thiago Oliveira [ctb] (ORCID: <https://orcid.org/0000-0002-4555-2584>),
+  Audrey Martin [ctb] (ORCID: <https://orcid.org/0000-0003-2235-0098>),
+  Philip Greenspoon [ctb] (ORCID:
+    <https://orcid.org/0000-0001-6284-7248>),
+  Ros Craddock [ctb] (ORCID: <https://orcid.org/0009-0004-1578-1580>)
 Maintainer: Chris Gaynor <gaynor.robert@hotmail.com>
 Repository: CRAN
-Date/Publication: 2024-11-01 15:10:06 UTC
+Date/Publication: 2025-09-01 23:00:09 UTC

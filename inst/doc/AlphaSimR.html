@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Chris Gaynor" />
+
+<meta name="date" content="2025-09-01" />
+
+<title>Introduction to AlphaSimR</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">
+
+div.csl-bib-body { }
+div.csl-entry {
+clear: both;
+margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+margin-left:2em;
+text-indent:-2em;
+}
+div.csl-left-margin {
+min-width:2em;
+float:left;
+}
+div.csl-right-inline {
+margin-left:2em;
+padding-left:1em;
+}
+div.csl-indent {
+margin-left: 2em;
+}
+</style>
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to AlphaSimR</h1>
+<h4 class="author">Chris Gaynor</h4>
+<h4 class="date">2025-09-01</h4>
+
+
+
+<p>AlphaSimR is a package for performing stochastic simulations of plant
+and animal breeding programs. It is the successor to the AlphaSim
+software for breeding program simulation <span class="citation">(Faux et
+al. 2016)</span>. AlphaSimR combines the features of its predecessor
+with the R software environment to create a flexible and easy-to-use
+software environment capable of simulating very complex plant and animal
+breeding programs.</p>
+<p>There is no single way to construct a simulation in AlphaSimR. This
+is an intentional design aspect of AlphaSimR, because it frees users
+from the constraints of predefined simulation structures. However, most
+simulations follow a general structure consisting of four steps:</p>
+<ol style="list-style-type: decimal">
+<li>Creating Founder Haplotypes</li>
+<li>Setting Simulation Parameters</li>
+<li>Modeling the Breeding Program</li>
+<li>Examining the Results</li>
+</ol>
+<p>The easiest way to learn how to use AlphaSimR is to learn about these
+steps. The easiest way to learn about these steps is to look at an
+example, so this vignette will introduce AlphaSimR by working through a
+small example simulation. The example will begin with a description of
+the breeding program being simulated. This will be followed by sections
+for each of the above steps and conclude with the full code for the
+example simulation.</p>
+<div id="example-breeding-program" class="section level2">
+<h2>Example Breeding Program</h2>
+<p>A simplified animal breeding program modeling 20 discrete generations
+of selection. Each generation consists of 1000 animals, of which 500 are
+male and 500 are female. In each generation, the best 25 males are
+selected on the basis of their genetic value for a single polygenic
+trait and mated to the females to produce 1000 replacement animals. The
+quantitative trait under selection is modeled as being controlled by
+10,000 QTL. These QTL are equally split across 10 chromosome groups so
+that there are 1,000 QTL per chromosome. The mean genetic value of all
+individuals in a generation is recorded to construct a plot for the
+genetic gain per generation.</p>
+</div>
+<div id="creating-founder-haplotypes" class="section level2">
+<h2>Creating Founder Haplotypes</h2>
+<p>The first step in the simulation is creating a set of founder
+haplotypes. The founder haplotypes are used to form the genome and
+genotypes of animals in the first generation. The genotypes of their
+descendants are then derived from these haplotypes using simulated
+mating and genetic recombination. For this simulation, only a single
+line of code is needed to create the haplotypes, and it is given
+below.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>founderPop <span class="ot">=</span> <span class="fu">quickHaplo</span>(<span class="at">nInd=</span><span class="dv">1000</span>, <span class="at">nChr=</span><span class="dv">10</span>, <span class="at">segSites=</span><span class="dv">1000</span>)</span></code></pre></div>
+<p>The code above uses the <code>quickHaplo</code> function to generate
+the initial haplotypes. The <code>quickHaplo</code> function generates
+haplotypes by randomly sampling 1s and 0s. This approach is equivalent
+to modeling a population in linkage and Hardy-Weinberg equilibrium with
+allele frequencies of 0.5. This approach is very rapid but does not
+generate realistic haplotypes. This makes the approach great for
+prototyping code, but ill-suited for some types of simulations.</p>
+<p>The preferred choice for simulating realistic haplotypes is to use
+the <code>runMacs</code> function. The <code>runMacs</code> function is
+a wrapper for the MaCS software, a coalescent simulation program
+included within the distribution of AlphaSimR <span class="citation">(Chen, Marjoram, and Wall 2009)</span>. The MaCS
+software is used by AlphaSimR to simulate bi-allelic genome sequences
+according to a population demographic history. The <code>runMacs</code>
+function allows the user to specify one of several predefined population
+histories or supply their own population history. A list of currently
+available population histories can be found in the <code>runMacs</code>
+help document.</p>
+<p>An alternative choice for providing realistic initial haplotypes is
+to import them with the <code>newMapPop</code> function. This function
+allows the user to import their own haplotypes that can be generated in
+another software package or taken directly from real marker data.</p>
+</div>
+<div id="setting-simulation-parameters" class="section level2">
+<h2>Setting Simulation Parameters</h2>
+<p>The second step is setting global parameters for the simulation. This
+can be done with three lines of code. The first line initializes an
+object containing the simulation parameters. The object must be
+initialized with the founder haplotypes created in the previous step and
+the code for doing so is given below.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>SP <span class="ot">=</span> SimParam<span class="sc">$</span><span class="fu">new</span>(founderPop)</span></code></pre></div>
+<p>The output from this function is an object of class
+<code>SimParam</code> and it is saved with the name <code>SP</code>. The
+name <code>SP</code> should almost always be used, because many
+AlphaSimR functions use an argument called “simParam” with a default
+value of <code>NULL</code>. If you leave this value as
+<code>NULL</code>, those functions will search your global environment
+for an object called <code>SP</code> and use it as the function’s
+argument. This means that if you use <code>SP</code>, you won’t need to
+specify a value for the “simParam” argument.</p>
+<p>The next line of code defines the quantitative trait used for
+selection. As mentioned in the previous section, this trait is
+controlled by 1000 QTL per chromosome. The rest of the function
+arguments are left as their defaults, which include a trait mean of zero
+and a variance of one unit.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>SP<span class="sc">$</span><span class="fu">addTraitA</span>(<span class="at">nQtlPerChr=</span><span class="dv">1000</span>)</span></code></pre></div>
+<p>The ‘A’ at the end of <code>SP$addTraitA</code> indicates that the
+trait’s QTL only have additive effects. All traits in AlphaSimR will
+include additive effects. Traits may also include any combination of
+three additional types of effects: dominance (“D”), epistasis (“E”), and
+genotype-by-environment (“G”). A specific combination of trait effects
+is requested by using a function with the appropriate letter ending. For
+example, a trait with additive and epistasis effects can be requested
+using <code>SP$addTraitAE</code>. The following trait types are
+currently offered: “A”, “AD”, “AE”, “AG”, “ADE”, “ADG”, “AEG”, and
+“ADEG”.</p>
+<p>The final line of code defines how sexes are determined in the
+simulation. Sex will be systematically assigned (i.e. male, female,
+male, …). Systematic assignment is used to ensure that there is always
+equal numbers of males and females.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>SP<span class="sc">$</span><span class="fu">setSexes</span>(<span class="st">&quot;yes_sys&quot;</span>)</span></code></pre></div>
+</div>
+<div id="modeling-the-breeding-program" class="section level2">
+<h2>Modeling the Breeding Program</h2>
+<p>We are now ready to start modeling the breeding program. To begin, we
+need to generate the initial population of animals. This step will take
+the haplotypes in <code>founderPop</code> and the information in
+<code>SP</code> to create an object of <code>Pop-class</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>pop <span class="ot">=</span> <span class="fu">newPop</span>(founderPop)</span></code></pre></div>
+<p>A <code>Pop-class</code> object represents a population of
+individuals. A population is the most important units in AlphaSimR,
+because most AlphaSimR functions use one or more populations as an
+argument. In this regard, AlphaSimR can be thought of as modeling
+discrete populations as its basic unit. This contrasts with its
+predecessor, which used discrete generations.</p>
+<p>Populations are not a fixed unit in AlphaSimR. Many functions in
+AlphaSimR take a population as an argument, modify the population, and
+then return the modified population. Populations can also be used
+“directly”. For example, you can pull individuals out to form new
+(sub-)populations using <code>[]</code> and you can merge populations
+together using <code>c()</code>. This functionality is particularly
+useful for performing tasks in AlphaSimR that lacks a built-in function.
+However, the example breeding program presented here is easily modeled
+using built-in functions.</p>
+<p>Before continuing to model the breeding program, you should first
+think about the data you’ll need for examining the results in the next
+stage. This is because you must expressly request that the relevant data
+is saved. AlphaSimR is designed this way for increased speed and reduced
+memory usage.</p>
+<p>In this example a plot of the generation mean over time is desired.
+All that is needed to construct this plot is a vector containing the
+mean in each generation. To start this vector, the mean in the current
+generation is saved as “genMean”. In each subsequent generation, the
+mean of that generation will be added to “genMean”. Measuring the mean
+in the current generation is accomplished with the code below.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>genMean <span class="ot">=</span> <span class="fu">meanG</span>(pop)</span></code></pre></div>
+<p>The final lines of code are for modeling 20 generations of selection
+and mating. AlphaSimR has a host of functions for modeling both
+selection and mating. In this example the <code>selectCross</code>
+function is used, because it efficiently combines both selection and
+mating in a single function call. The function itself actually uses two
+separate function in AlphaSimR, <code>selectInd</code> and
+<code>randCross</code> for selection and mating, respectively.</p>
+<p>To model multiple generations of selection, the function call is
+placed within a loop with a line of code for tracking the population
+mean. Using a loop makes code easier to read and avoids needless
+duplication. In this loop “pop” is overwritten in each generation. Doing
+this keeps memory usage low and keeps the code simple. However, if the
+user needed to retain older populations there are several alternative
+approaches that could be adopted. These approaches include giving each
+population a unique name, storing populations as elements in a list, or
+dynamically growing populations with <code>c()</code>. The code for the
+loop is given below.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="cf">for</span>(generation <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>){</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  pop <span class="ot">=</span> <span class="fu">selectCross</span>(<span class="at">pop=</span>pop, <span class="at">nFemale=</span><span class="dv">500</span>, <span class="at">nMale=</span><span class="dv">25</span>, <span class="at">use=</span><span class="st">&quot;gv&quot;</span>, <span class="at">nCrosses=</span><span class="dv">1000</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  genMean <span class="ot">=</span> <span class="fu">c</span>(genMean, <span class="fu">meanG</span>(pop))</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="examining-the-results" class="section level2">
+<h2>Examining the Results</h2>
+<p>The last step to a simulation is examining the results. In this
+example there is only one result: a vector of population means for each
+generation. To examine this result, the code below will produce a basic
+line plot.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>, genMean, <span class="at">xlab=</span><span class="st">&quot;Generation&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Mean Genetic Value&quot;</span>, <span class="at">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+</div>
+<div id="full-code" class="section level2">
+<h2>Full Code</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">library</span>(AlphaSimR)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Creating Founder Haplotypes</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>founderPop <span class="ot">=</span> <span class="fu">quickHaplo</span>(<span class="at">nInd=</span><span class="dv">1000</span>, <span class="at">nChr=</span><span class="dv">10</span>, <span class="at">segSites=</span><span class="dv">1000</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># Setting Simulation Parameters</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>SP <span class="ot">=</span> SimParam<span class="sc">$</span><span class="fu">new</span>(founderPop)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>SP<span class="sc">$</span><span class="fu">addTraitA</span>(<span class="at">nQtlPerChr=</span><span class="dv">1000</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>SP<span class="sc">$</span><span class="fu">setSexes</span>(<span class="st">&quot;yes_sys&quot;</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># Modeling the Breeding Program</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>pop <span class="ot">=</span> <span class="fu">newPop</span>(founderPop)</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>genMean <span class="ot">=</span> <span class="fu">meanG</span>(pop)</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="cf">for</span>(generation <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>){</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>  pop <span class="ot">=</span> <span class="fu">selectCross</span>(<span class="at">pop=</span>pop, <span class="at">nFemale=</span><span class="dv">500</span>, <span class="at">nMale=</span><span class="dv">25</span>, <span class="at">use=</span><span class="st">&quot;gv&quot;</span>, <span class="at">nCrosses=</span><span class="dv">1000</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>  genMean <span class="ot">=</span> <span class="fu">c</span>(genMean, <span class="fu">meanG</span>(pop))</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>}</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co"># Examining the Results</span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>, genMean, <span class="at">xlab=</span><span class="st">&quot;Generation&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Mean Genetic Value&quot;</span>, <span class="at">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1 class="unnumbered">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-MaCS" class="csl-entry">
+Chen, Gary K., Paul Marjoram, and Jeffery D. Wall. 2009. <span>“Fast and
+Flexible Simulation of DNA Sequence Data.”</span> <em>Genome
+Research</em> 19: 136–42. <a href="https://genome.cshlp.org/content/19/1/136">https://genome.cshlp.org/content/19/1/136</a>.
+</div>
+<div id="ref-AlphaSim" class="csl-entry">
+Faux, Anne-Michelle, Gregor Gorjanc, R. Chris Gaynor, Mara Battagin,
+Stefan M. Edwards, David L. Wilson, Sarah J. Hearne, Serap Gonen, and
+John M. Hickey. 2016. <span>“AlphaSim: Software for Breeding Program
+Simulation.”</span> <em>The Plant Genome</em> 9 (3). <a href="https://doi.org/10.3835/plantgenome2016.02.0013">https://doi.org/10.3835/plantgenome2016.02.0013</a>.
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
